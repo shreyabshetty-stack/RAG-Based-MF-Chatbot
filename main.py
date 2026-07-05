@@ -10,12 +10,12 @@ import os
 import sys
 import socket
 
-# DNS resolution workaround for api-inference.huggingface.co on Vercel:
+# DNS resolution workaround for Hugging Face domains on Vercel:
 # Forcing AF_INET (IPv4) bypasses buggy IPv6/DNSSEC resolution paths in the serverless datacenter.
 _original_getaddrinfo = socket.getaddrinfo
 
 def custom_getaddrinfo(host, port, family=0, type=0, proto=0, flags=0):
-    if host == "api-inference.huggingface.co":
+    if host in ("api-inference.huggingface.co", "router.huggingface.co"):
         family = socket.AF_INET
     return _original_getaddrinfo(host, port, family, type, proto, flags)
 

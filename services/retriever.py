@@ -49,7 +49,7 @@ class MutualFundRetriever:
         import requests
         import time
         
-        api_url = f"https://api-inference.huggingface.co/models/{EMBEDDING_MODEL_NAME}"
+        api_url = f"https://router.huggingface.co/hf-inference/models/{EMBEDDING_MODEL_NAME}"
         hf_token = os.getenv("HF_TOKEN")
         headers = {}
         if hf_token:
