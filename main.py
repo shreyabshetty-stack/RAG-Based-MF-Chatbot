@@ -10,59 +10,15 @@ import os
 import sys
 import socket
 
-# DNS resolution workaround for api-inference.huggingface.co in serverless datacenters (e.g. Vercel)
+# DNS resolution workaround for api-inference.huggingface.co on Vercel:
+# Forcing AF_INET (IPv4) bypasses buggy IPv6/DNSSEC resolution paths in the serverless datacenter.
 _original_getaddrinfo = socket.getaddrinfo
-
-def resolve_dns_doh(hostname):
-    import requests
-    # 1. Try Cloudflare DoH
-    try:
-        response = requests.get(
-            "https://cloudflare-dns.com/dns-query",
-            headers={"accept": "application/dns-json"},
-            params={"name": hostname, "type": "A"},
-            timeout=3
-        )
-        if response.status_code == 200:
-            answers = response.json().get("Answer", [])
-            for answer in answers:
-                if answer.get("type") == 1:
-                    return answer.get("data")
-    except Exception:
-        pass
-
-    # 2. Try Google DoH fallback
-    try:
-        response = requests.get(
-            "https://dns.google/resolve",
-            params={"name": hostname, "type": "A"},
-            timeout=3
-        )
-        if response.status_code == 200:
-            answers = response.json().get("Answer", [])
-            for answer in answers:
-                if answer.get("type") == 1:
-                    return answer.get("data")
-    except Exception:
-        pass
-
-    # 3. Static IP fallback for Hugging Face (Cloudflare CDN IPs)
-    if hostname == "api-inference.huggingface.co":
-        return "104.18.22.48"
-    return None
 
 def custom_getaddrinfo(host, port, family=0, type=0, proto=0, flags=0):
     if host == "api-inference.huggingface.co":
-        resolved_ip = resolve_dns_doh(host)
-        if resolved_ip:
-            try:
-                # Force AF_INET (IPv4) for the resolved static IP to avoid IPv6 gaierrors
-                return _original_getaddrinfo(resolved_ip, port, socket.AF_INET, type, proto, flags)
-            except Exception:
-                pass
+        family = socket.AF_INET
     return _original_getaddrinfo(host, port, family, type, proto, flags)
 
-# Apply global socket.getaddrinfo monkey patch
 socket.getaddrinfo = custom_getaddrinfo
 
 import logging
