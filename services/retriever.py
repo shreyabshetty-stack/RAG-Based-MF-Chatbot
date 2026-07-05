@@ -9,62 +9,6 @@ if os.environ.get("VERCEL"):
     except ImportError:
         pass
 
-import socket
-
-# DNS resolution workaround for api-inference.huggingface.co in serverless datacenters
-_original_getaddrinfo = socket.getaddrinfo
-
-def resolve_dns_doh(hostname):
-    import requests
-    # 1. Try Cloudflare DoH
-    try:
-        response = requests.get(
-            "https://cloudflare-dns.com/dns-query",
-            headers={"accept": "application/dns-json"},
-            params={"name": hostname, "type": "A"},
-            timeout=3
-        )
-        if response.status_code == 200:
-            answers = response.json().get("Answer", [])
-            for answer in answers:
-                if answer.get("type") == 1:
-                    return answer.get("data")
-    except Exception:
-        pass
-
-    # 2. Try Google DoH fallback
-    try:
-        response = requests.get(
-            "https://dns.google/resolve",
-            params={"name": hostname, "type": "A"},
-            timeout=3
-        )
-        if response.status_code == 200:
-            answers = response.json().get("Answer", [])
-            for answer in answers:
-                if answer.get("type") == 1:
-                    return answer.get("data")
-    except Exception:
-        pass
-
-    # 3. Static IP fallback for Hugging Face (Cloudflare CDN IPs)
-    if hostname == "api-inference.huggingface.co":
-        return "104.18.22.48"
-    return None
-
-def custom_getaddrinfo(host, port, family=0, type=0, proto=0, flags=0):
-    if host == "api-inference.huggingface.co":
-        resolved_ip = resolve_dns_doh(host)
-        if resolved_ip:
-            try:
-                return _original_getaddrinfo(resolved_ip, port, family, type, proto, flags)
-            except Exception:
-                pass
-    return _original_getaddrinfo(host, port, family, type, proto, flags)
-
-# Apply socket getaddrinfo monkey patch
-socket.getaddrinfo = custom_getaddrinfo
-
 import chromadb
 
 # Constants (aligned with chunk_and_embed.py)
