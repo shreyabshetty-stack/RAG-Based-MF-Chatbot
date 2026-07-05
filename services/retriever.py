@@ -1,4 +1,14 @@
 import os
+import sys
+
+# On Vercel, override system SQLite if pysqlite3-binary is installed
+if os.environ.get("VERCEL"):
+    try:
+        __import__('pysqlite3')
+        sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+    except ImportError:
+        pass
+
 import chromadb
 from sentence_transformers import SentenceTransformer
 
