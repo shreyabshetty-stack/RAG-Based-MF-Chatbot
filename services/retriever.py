@@ -24,6 +24,21 @@ class MutualFundRetriever:
         
         if not os.path.exists(self.db_path):
             raise FileNotFoundError(f"ChromaDB not found at {self.db_path}. Please run chunk_and_embed.py first.")
+
+        # Vercel Serverless environment runs on a read-only filesystem.
+        # We must copy the database directory to /tmp (which is writable) to avoid SQLite journal/lock failures.
+        if os.environ.get("VERCEL"):
+            import shutil
+            tmp_db_path = "/tmp/chroma_db"
+            print(f"Vercel detected. Copying ChromaDB from {self.db_path} to {tmp_db_path}...")
+            try:
+                if os.path.exists(tmp_db_path):
+                    shutil.rmtree(tmp_db_path)
+                shutil.copytree(self.db_path, tmp_db_path)
+                self.db_path = tmp_db_path
+                print("ChromaDB copied to /tmp successfully.")
+            except Exception as e:
+                print(f"Error copying ChromaDB to /tmp: {e}")
             
         print("Connecting to ChromaDB client...")
         self.chroma_client = chromadb.PersistentClient(path=self.db_path)
