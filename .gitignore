@@ -13,5 +13,3 @@ venv/
 env/
 ENV/
 
-# Local databases & search indexes
-data/chroma_db/
