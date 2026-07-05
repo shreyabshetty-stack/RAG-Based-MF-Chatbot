@@ -10,7 +10,6 @@ if os.environ.get("VERCEL"):
         pass
 
 import chromadb
-from sentence_transformers import SentenceTransformer
 
 # Constants (aligned with chunk_and_embed.py)
 CHROMA_DB_DIR = "data/chroma_db"
@@ -26,12 +25,53 @@ class MutualFundRetriever:
         if not os.path.exists(self.db_path):
             raise FileNotFoundError(f"ChromaDB not found at {self.db_path}. Please run chunk_and_embed.py first.")
             
-        print("Loading BGE embedding model in retriever...")
-        self.model = SentenceTransformer(EMBEDDING_MODEL_NAME)
-        
         print("Connecting to ChromaDB client...")
         self.chroma_client = chromadb.PersistentClient(path=self.db_path)
         self.collection = self.chroma_client.get_collection(COLLECTION_NAME)
+
+    def _get_embedding(self, text):
+        """Fetches embedding vector from Hugging Face Inference API with automatic retry/backoff."""
+        import requests
+        import time
+        
+        api_url = f"https://api-inference.huggingface.co/models/{EMBEDDING_MODEL_NAME}"
+        hf_token = os.getenv("HF_TOKEN")
+        headers = {}
+        if hf_token:
+            headers["Authorization"] = f"Bearer {hf_token}"
+            
+        payload = {"inputs": text}
+        max_retries = 3
+        delay = 2
+        
+        for attempt in range(max_retries):
+            try:
+                response = requests.post(api_url, headers=headers, json=payload, timeout=15)
+                
+                # Handle model loading cold start
+                if response.status_code == 503 or (response.status_code == 200 and "error" in response.text and "loading" in response.text):
+                    res_json = response.json()
+                    estimated_time = res_json.get("estimated_time", 15)
+                    print(f"HF Model is loading. Waiting {estimated_time}s (Attempt {attempt+1}/{max_retries})...")
+                    time.sleep(min(estimated_time, 20))
+                    continue
+                
+                response.raise_for_status()
+                embedding = response.json()
+                
+                if isinstance(embedding, list):
+                    if len(embedding) > 0 and isinstance(embedding[0], list):
+                        embedding = embedding[0]
+                    return [float(x) for x in embedding]
+                raise ValueError(f"Unexpected response format: {embedding}")
+                
+            except Exception as e:
+                if attempt == max_retries - 1:
+                    print(f"Failed to fetch embedding after {max_retries} attempts: {e}")
+                    raise
+                print(f"Failed to fetch embedding: {e}. Retrying in {delay}s...")
+                time.sleep(delay)
+                delay *= 2
 
     def retrieve_relevant_contexts(self, query_text, top_k=3):
         """
@@ -42,7 +82,7 @@ class MutualFundRetriever:
         prefixed_query = f"Represent this sentence for searching relevant passages: {query_text}"
         
         # Embed query
-        query_embedding = self.model.encode(prefixed_query).tolist()
+        query_embedding = self._get_embedding(prefixed_query)
         
         # Query DB (fetch more candidates to allow for re-ranking)
         results = self.collection.query(

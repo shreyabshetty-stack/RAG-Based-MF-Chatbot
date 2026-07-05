@@ -321,5 +321,30 @@ class TestResponseValidator(unittest.TestCase):
         self.assertTrue(any("Advisory language detected" in w for w in warnings))
 
 
+class TestMutualFundRetriever(unittest.TestCase):
+    """Test MutualFundRetriever class using mocked HTTP calls for embeddings."""
+
+    @patch("requests.post")
+    @patch("chromadb.PersistentClient")
+    @patch("os.path.exists")
+    def test_get_embedding_success(self, mock_exists, mock_chroma_client, mock_post):
+        mock_exists.return_value = True
+        
+        # Configure mock response for requests.post
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.text = "[0.1, 0.2, 0.3]"
+        mock_response.json.return_value = [0.1, 0.2, 0.3]
+        mock_post.return_value = mock_response
+        
+        from services.retriever import MutualFundRetriever
+        retriever = MutualFundRetriever()
+        
+        emb = retriever._get_embedding("test query")
+        self.assertEqual(emb, [0.1, 0.2, 0.3])
+        mock_post.assert_called_once()
+
+
 if __name__ == "__main__":
     unittest.main()
+
