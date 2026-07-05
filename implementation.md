@@ -11,7 +11,7 @@ Phase 1: Setup & Data Ingestion ──> Phase 2: Vector DB Indexing ──> Phas
                                                                                   │
 Phase 6: Web Interface & API   <── Phase 5: Post-Validation     <── Phase 4: Intent & PII Guardrails
        │
-       └──> Phase 7: Verification & Testing
+       └──> Phase 7: Verification & Testing ──> Phase 8: Daily Ingestion Scheduler
 ```
 
 ---
@@ -106,3 +106,15 @@ Phase 6: Web Interface & API   <── Phase 5: Post-Validation     <── Phas
   * PII redaction.
   * Post-validator triggers.
 * **Task 7.2:** Prepare a test script executing standard queries, verifying that responses match the source page facts and adhere strictly to the 3-sentence limits.
+
+---
+
+### Phase 8: Daily Ingestion Scheduler (GitHub Actions)
+**Goal:** Automate raw data scraping and database updates daily using a GitHub Actions cron job.
+
+* **Task 8.1:** Create a GitHub Actions workflow configuration file at [.github/workflows/daily_ingest.yml](file:///d:/RAG%20Based%20MF%20Chatbot/.github/workflows/daily_ingest.yml).
+* **Task 8.2:** Set up the trigger schedule (daily at midnight UTC) and configure `workflow_dispatch` to allow manual execution.
+* **Task 8.3:** Configure steps to set up Python, install dependencies from `requirements.txt`, run [ingest.py](file:///d:/RAG%20Based%20MF%20Chatbot/scripts/ingest.py), and run [chunk_and_embed.py](file:///d:/RAG%20Based%20MF%20Chatbot/scripts/chunk_and_embed.py).
+* **Task 8.4:** Add a Git commit and push step within the workflow to save and deploy the updated JSON corpus and vector store.
+
+
