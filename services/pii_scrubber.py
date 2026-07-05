@@ -3,7 +3,7 @@ import re
 # Regex patterns for various PII targets
 PAN_PATTERN = re.compile(r"\b[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}\b")
 AADHAAR_PATTERN = re.compile(r"\b[2-9]{1}\d{3}\s\d{4}\s\d{4}\b|\b[2-9]{1}\d{11}\b")
-PHONE_PATTERN = re.compile(r"\b(?:\+?91[-.\s]?)?[6-9]\d{9}\b")
+PHONE_PATTERN = re.compile(r"\+?91[-.\s]?[6-9]\d{9}\b|\b[6-9]\d{9}\b")
 EMAIL_PATTERN = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
 OTP_CONTEXT_PATTERN = re.compile(r"\b(?:otp|one[- ]time[- ]password|pin)\s*(?:is\s*)?:?\s*\b\d{4,8}\b", re.IGNORECASE)
 

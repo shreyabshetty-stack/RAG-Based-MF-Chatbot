@@ -50,6 +50,14 @@ def scrape_fund_data(url):
         aum = server_data.get('aum')
         isin = server_data.get('isin')
         
+        # New factual attributes
+        nav = server_data.get('nav')
+        nav_date = server_data.get('nav_date')
+        portfolio_turnover = server_data.get('portfolio_turnover')
+        face_value = server_data.get('face_value')
+        groww_rating = server_data.get('groww_rating')
+        crisil_rating = server_data.get('crisil_rating')
+        
         # Hardcode ELSS Lock-in check
         # Under Section 80C, ELSS funds have a mandatory 3-year lock-in period.
         is_elss = "elss" in url.lower() or "tax-saver" in url.lower() or (scheme_name and "elss" in scheme_name.lower())
@@ -72,6 +80,12 @@ def scrape_fund_data(url):
             "fund_manager": clean_str(fund_manager),
             "launch_date": clean_str(launch_date),
             "aum_in_cr": aum,
+            "nav": nav,
+            "nav_date": clean_str(nav_date),
+            "portfolio_turnover": clean_str(portfolio_turnover) if portfolio_turnover is not None else None,
+            "face_value": face_value,
+            "groww_rating": groww_rating,
+            "crisil_rating": crisil_rating,
             "last_updated": datetime.now().strftime("%Y-%m-%d")
         }
         
@@ -83,6 +97,11 @@ def scrape_fund_data(url):
         print(f"  ELSS Lock-in: {fund_details['elss_lock_in']}")
         print(f"  Risk: {fund_details['risk_classification']}")
         print(f"  Benchmark: {fund_details['benchmark_index']}")
+        print(f"  NAV: {fund_details['nav']} ({fund_details['nav_date']})")
+        print(f"  Portfolio Turnover: {fund_details['portfolio_turnover']}")
+        print(f"  Face Value: {fund_details['face_value']}")
+        print(f"  Groww Rating: {fund_details['groww_rating']}")
+        print(f"  Crisil Rating: {fund_details['crisil_rating']}")
         print("-" * 50)
         
         return fund_details

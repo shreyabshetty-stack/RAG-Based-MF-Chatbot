@@ -19,7 +19,7 @@ from pydantic import BaseModel, Field
 
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 # ─── Logging ──────────────────────────────────────────────────────
 logging.basicConfig(level=logging.INFO, format="%(levelname)s:     %(message)s")
@@ -174,6 +174,74 @@ async def chat(req: ChatRequest):
             updated_date=today_iso,
             pii_detected=pii_detected,
             validation_warnings=[],
+        )
+
+    # ── Step 2.5: Ambiguity & Unsupported Fund Checks ──────────────────
+    query_lower = clean_query.lower()
+    
+    # Check general relevance (out-of-scope queries)
+    finance_keywords = [
+        "fund", "scheme", "sip", "exit load", "expense ratio", "isin", "manager",
+        "launch", "benchmark", "risk", "statement", "report", "download", "capital gains",
+        "tax", "lock-in", "lock in", "aum", "growth", "direct", "plan", "portfolio", "invest",
+        "nav", "turnover", "face value", "rating", "star"
+    ]
+    is_relevant = any(kw in query_lower for kw in finance_keywords)
+    if not is_relevant:
+        logger.info("General out-of-scope query detected. Returning refusal.")
+        return ChatResponse(
+            answer="I am sorry, but I cannot find that information in the official documents.",
+            source_url=None,
+            intent="FACTUAL",
+            updated_date=today_iso,
+            pii_detected=pii_detected,
+            validation_warnings=[]
+        )
+
+    supported_keywords = [
+        "mid cap", "mid-cap", "midcap",
+        "flexi cap", "flexicap", "equity",
+        "focused",
+        "elss", "tax saver", "tax-saver",
+        "large cap", "largecap", "top 100"
+    ]
+    has_supported_fund = any(kw in query_lower for kw in supported_keywords)
+
+    unsupported_keywords = [
+        "small cap", "small-cap", "smallcap",
+        "gold", "hybrid", "balanced", "liquid", "debt", "index fund", "index scheme", "nifty 50", "nifty"
+    ]
+    has_unsupported_fund = any(kw in query_lower for kw in unsupported_keywords)
+
+    parameter_keywords = [
+        "exit load", "expense ratio", "isin", "manager", "launch date", "benchmark", "risk", "sip",
+        "nav", "turnover", "face value", "rating", "stars"
+    ]
+    is_parameter_query = any(kw in query_lower for kw in parameter_keywords)
+    is_procedural = any(kw in query_lower for kw in ["statement", "report", "download", "capital gains", "how to"])
+
+    # Refuse unsupported funds
+    if has_unsupported_fund or (not has_supported_fund and "fund" in query_lower and ("small" in query_lower or "gold" in query_lower or "balanced" in query_lower or "hybrid" in query_lower or "liquid" in query_lower or "debt" in query_lower or "index" in query_lower)):
+        logger.info("Unsupported fund query detected. Returning out-of-scope refusal.")
+        return ChatResponse(
+            answer="I am sorry, but I cannot find that information in the official documents.",
+            source_url=None,
+            intent="FACTUAL",
+            updated_date=today_iso,
+            pii_detected=pii_detected,
+            validation_warnings=[]
+        )
+
+    # Clarify ambiguous fund queries
+    if is_parameter_query and not has_supported_fund and not is_procedural:
+        logger.info("Ambiguous fund query detected. Returning clarification request.")
+        return ChatResponse(
+            answer="Please specify which fund you are referring to: HDFC Mid-Cap, HDFC Flexi Cap, HDFC Focused 30, HDFC ELSS Tax Saver, or HDFC Top 100.",
+            source_url=None,
+            intent="FACTUAL",
+            updated_date=today_iso,
+            pii_detected=pii_detected,
+            validation_warnings=[]
         )
 
     # ── Step 3: Vector Retrieval ───────────────────────────────────

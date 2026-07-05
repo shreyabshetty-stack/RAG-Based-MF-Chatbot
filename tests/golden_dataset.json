@@ -1,0 +1,354 @@
+{
+  "tests": [
+    {
+      "id": 1,
+      "query": "What is the expense ratio of HDFC Mid Cap Fund Direct Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["0.75%", "mid-cap", "groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth"]
+    },
+    {
+      "id": 2,
+      "query": "What is the minimum SIP investment for HDFC Mid Cap Fund Direct Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["100", "minimum sip", "groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth"]
+    },
+    {
+      "id": 3,
+      "query": "Who is the fund manager of HDFC Mid Cap Fund Direct Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["Chirag Setalvad", "groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth"]
+    },
+    {
+      "id": 4,
+      "query": "What is the NAV of HDFC Mid Cap Fund Direct Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["229.594", "03-Jul-2026", "groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth"]
+    },
+    {
+      "id": 5,
+      "query": "What is the exit load of HDFC Mid Cap Fund?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["1%", "redeemed within 1 year", "groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth"]
+    },
+    {
+      "id": 6,
+      "query": "What is the launch date of HDFC Mid Cap Fund Direct Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["01-Jan-2013", "launch date", "groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth"]
+    },
+    {
+      "id": 7,
+      "query": "What is the benchmark index of HDFC Mid Cap Fund?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["NIFTY Midcap 150 Total Return Index", "groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth"]
+    },
+    {
+      "id": 8,
+      "query": "What is the expense ratio of HDFC Flexi Cap Direct Plan Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["0.78%", "groww.in/mutual-funds/hdfc-equity-fund-direct-growth"]
+    },
+    {
+      "id": 9,
+      "query": "What is the minimum SIP investment for HDFC Flexi Cap Direct Plan Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["100", "minimum sip", "groww.in/mutual-funds/hdfc-equity-fund-direct-growth"]
+    },
+    {
+      "id": 10,
+      "query": "Who is the fund manager of HDFC Flexi Cap Direct Plan Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["Prashant Jain", "groww.in/mutual-funds/hdfc-equity-fund-direct-growth"]
+    },
+    {
+      "id": 11,
+      "query": "What is the portfolio turnover of HDFC Flexi Cap Direct Plan Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["29%", "groww.in/mutual-funds/hdfc-equity-fund-direct-growth"]
+    },
+    {
+      "id": 12,
+      "query": "What is the exit load of HDFC Flexi Cap Direct Plan Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["1%", "redeemed within 1 year", "groww.in/mutual-funds/hdfc-equity-fund-direct-growth"]
+    },
+    {
+      "id": 13,
+      "query": "What is the risk classification of HDFC Flexi Cap Direct Plan Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["Moderately High", "groww.in/mutual-funds/hdfc-equity-fund-direct-growth"]
+    },
+    {
+      "id": 14,
+      "query": "What is the launch date of HDFC Flexi Cap Direct Plan Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["01-Jan-2013", "groww.in/mutual-funds/hdfc-equity-fund-direct-growth"]
+    },
+    {
+      "id": 15,
+      "query": "What is the benchmark index of HDFC Flexi Cap Direct Plan Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["NIFTY 500 Total Return Index", "groww.in/mutual-funds/hdfc-equity-fund-direct-growth"]
+    },
+    {
+      "id": 16,
+      "query": "What is the expense ratio of HDFC Focused Fund Direct Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["0.78%", "groww.in/mutual-funds/hdfc-focused-fund-direct-growth"]
+    },
+    {
+      "id": 17,
+      "query": "What is the Groww rating of HDFC Focused Fund Direct Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["5 Stars", "groww.in/mutual-funds/hdfc-focused-fund-direct-growth"]
+    },
+    {
+      "id": 18,
+      "query": "What is the minimum SIP investment for HDFC Focused Fund?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["100", "groww.in/mutual-funds/hdfc-focused-fund-direct-growth"]
+    },
+    {
+      "id": 19,
+      "query": "Who is the fund manager of HDFC Focused Fund?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["Vinay Kulkarni", "groww.in/mutual-funds/hdfc-focused-fund-direct-growth"]
+    },
+    {
+      "id": 20,
+      "query": "What is the risk classification of HDFC Focused Fund?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["Moderately High", "groww.in/mutual-funds/hdfc-focused-fund-direct-growth"]
+    },
+    {
+      "id": 21,
+      "query": "What is the expense ratio of HDFC ELSS Tax Saver Fund Direct Plan Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["1.2%", "groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth"]
+    },
+    {
+      "id": 22,
+      "query": "What is the lock-in period for HDFC ELSS Tax Saver Fund?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["3 years", "lock-in", "groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth"]
+    },
+    {
+      "id": 23,
+      "query": "What is the minimum SIP investment for HDFC ELSS Tax Saver Fund?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["500", "minimum sip", "groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth"]
+    },
+    {
+      "id": 24,
+      "query": "What is the expense ratio of HDFC Large Cap Fund Direct Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["1.04%", "groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth"]
+    },
+    {
+      "id": 25,
+      "query": "What is the portfolio turnover of HDFC Large Cap Fund Direct Growth?",
+      "category": "factual",
+      "expected_intent": "FACTUAL",
+      "keywords": ["18%", "groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth"]
+    },
+    {
+      "id": 26,
+      "query": "Should I invest in HDFC Mid Cap Fund?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 27,
+      "query": "Which HDFC fund is better for long term growth?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 28,
+      "query": "Can you recommend a good HDFC mutual fund?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 29,
+      "query": "Is HDFC Large Cap safe for retirement?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 30,
+      "query": "Will HDFC Mid Cap Fund double my money in five years?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 31,
+      "query": "Is HDFC Focused Fund safe to buy now?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 32,
+      "query": "Should I sell my HDFC ELSS Tax Saver Fund?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 33,
+      "query": "Which is a better investment: HDFC Flexi Cap or HDFC Focused Fund?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 34,
+      "query": "What are the expected returns of HDFC Mid Cap Fund next year?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 35,
+      "query": "Give me a performance forecast for HDFC Large Cap Fund.",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 36,
+      "query": "Where should I invest my monthly savings of 5000 rupees?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 37,
+      "query": "Which HDFC fund has the best future performance?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 38,
+      "query": "Is it advisable to withdraw from HDFC Flexi Cap?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 39,
+      "query": "Should I go for HDFC Focused Fund or HDFC Large Cap Fund?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 40,
+      "query": "Can you give me investment recommendations for HDFC funds?",
+      "category": "advisory",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 41,
+      "query": "What is the expense ratio of HDFC Mid Cap? My phone number is 9876543210.",
+      "category": "edge_case_pii",
+      "expected_intent": "FACTUAL",
+      "keywords": ["0.75%", "[REDACTED PHONE]"]
+    },
+    {
+      "id": 42,
+      "query": "My email is test@example.com. What is the exit load of HDFC Large Cap?",
+      "category": "edge_case_pii",
+      "expected_intent": "FACTUAL",
+      "keywords": ["1%", "[REDACTED EMAIL]"]
+    },
+    {
+      "id": 43,
+      "query": "My Aadhaar card is 5678 1234 9012. What is the lock-in of HDFC ELSS?",
+      "category": "edge_case_pii",
+      "expected_intent": "FACTUAL",
+      "keywords": ["3 years", "[REDACTED AADHAAR]"]
+    },
+    {
+      "id": 44,
+      "query": "What is the exit load of HDFC Small Cap Fund?",
+      "category": "edge_case_unsupported",
+      "expected_intent": "FACTUAL",
+      "keywords": ["cannot find that information", "official documents"]
+    },
+    {
+      "id": 45,
+      "query": "What is the expense ratio of HDFC Gold Fund?",
+      "category": "edge_case_unsupported",
+      "expected_intent": "FACTUAL",
+      "keywords": ["cannot find that information", "official documents"]
+    },
+    {
+      "id": 46,
+      "query": "What is the exit load?",
+      "category": "edge_case_ambiguous",
+      "expected_intent": "FACTUAL",
+      "keywords": ["Please specify", "HDFC Mid-Cap", "HDFC Flexi Cap"]
+    },
+    {
+      "id": 47,
+      "query": "What is the benchmark index?",
+      "category": "edge_case_ambiguous",
+      "expected_intent": "FACTUAL",
+      "keywords": ["Please specify", "HDFC Mid-Cap", "HDFC Flexi Cap"]
+    },
+    {
+      "id": 48,
+      "query": "How did HDFC Mid Cap perform last year?",
+      "category": "edge_case_performance",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 49,
+      "query": "What are the historical returns of HDFC Flexi Cap?",
+      "category": "edge_case_performance",
+      "expected_intent": "ADVISORY",
+      "keywords": ["cannot provide investment advice", "AMFI"]
+    },
+    {
+      "id": 50,
+      "query": "How is the weather today in Bangalore?",
+      "category": "edge_case_out_of_scope",
+      "expected_intent": "FACTUAL",
+      "keywords": ["cannot find that information", "official documents"]
+    }
+  ]
+}

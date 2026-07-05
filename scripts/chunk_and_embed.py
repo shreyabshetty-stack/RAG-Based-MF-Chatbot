@@ -30,7 +30,7 @@ PROCEDURAL_CHUNK = {
 def create_semantic_chunks(fund):
     """
     Splits a single mutual fund entry into three distinct semantic chunks:
-    1. General Info & AUM
+    1. General Info & Stats (AUM, NAV, Turnover, Ratings)
     2. Fees, Loads & Lock-in
     3. Risk & Benchmark Index
     """
@@ -46,16 +46,31 @@ def create_semantic_chunks(fund):
     fund_manager = fund.get("fund_manager")
     launch_date = fund.get("launch_date")
     aum = fund.get("aum_in_cr")
+    nav = fund.get("nav")
+    nav_date = fund.get("nav_date")
+    portfolio_turnover = fund.get("portfolio_turnover")
+    face_value = fund.get("face_value")
+    groww_rating = fund.get("groww_rating")
+    crisil_rating = fund.get("crisil_rating")
     last_updated = fund.get("last_updated")
 
     chunks = []
 
     # Chunk 1: General Info & AUM
+    rating_str = f"Groww Rating: {groww_rating} Stars. " if groww_rating else ""
+    if crisil_rating:
+        rating_str += f"Crisil Rating: {crisil_rating} Stars. "
+    face_val_str = f"Face Value: {face_value} INR. " if face_value else ""
+    turnover_str = f"Portfolio Turnover Ratio: {portfolio_turnover}%. " if portfolio_turnover else ""
+    nav_str = f"Net Asset Value (NAV): {nav} INR as of {nav_date}. " if nav else ""
+    
     chunk_1_text = (
         f"Mutual Fund Scheme: {scheme_name}. ISIN Code: {isin}. "
         f"Fund House: HDFC Mutual Fund. Fund Manager: {fund_manager}. "
-        f"Launch Date: {launch_date}. Total Assets Under Management (AUM): {aum} Crores."
-    )
+        f"Launch Date: {launch_date}. Total Assets Under Management (AUM): {aum} Crores. "
+        f"{nav_str}{turnover_str}{face_val_str}{rating_str}"
+    ).strip()
+    
     chunks.append({
         "text": chunk_1_text,
         "metadata": {

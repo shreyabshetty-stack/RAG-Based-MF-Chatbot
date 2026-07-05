@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from groq import Groq, RateLimitError, APIStatusError
 
 # Load environment variables from .env
-load_dotenv()
+load_dotenv(override=True)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -20,7 +20,7 @@ GROQ_RATE_LIMITS = {
 }
 
 # Model config
-DEFAULT_MODEL = "llama3-8b-8192"
+DEFAULT_MODEL = "llama-3.1-8b-instant"
 MAX_OUTPUT_TOKENS = 250     # Bounded output length (keeps token usage predictable)
 MAX_RETRIES = 3             # Maximum retry attempts on rate limit hit
 RETRY_BASE_DELAY_SECS = 2  # Exponential backoff base (doubles each retry)
@@ -36,13 +36,14 @@ RATE_LIMIT_FALLBACK = (
 class MutualFundGenerator:
     def __init__(self):
         self.api_key = os.getenv("GROQ_API_KEY")
+        self.client = None
         if not self.api_key or "your_groq_api_key" in self.api_key:
-            raise ValueError(
+            logger.warning(
                 "GROQ_API_KEY environment variable is missing or placeholder. "
-                "Please set a valid Groq API key in your .env file."
+                "The generator will return a configuration warning message for queries."
             )
-
-        self.client = Groq(api_key=self.api_key)
+        else:
+            self.client = Groq(api_key=self.api_key)
         logger.info("Groq client initialized successfully.")
         logger.info(
             "Groq Rate Limits: %d req/min | %d req/day | %d tokens/min | %d tokens/day",
@@ -88,6 +89,13 @@ class MutualFundGenerator:
         """
         if not contexts:
             return "I am sorry, but I cannot find that information in the official documents."
+
+        if not self.client:
+            logger.error("Groq client is not configured. GROQ_API_KEY is missing or is a placeholder.")
+            return (
+                "The LLM backend is not configured. Please set a valid GROQ_API_KEY in the .env file "
+                "and restart the server to enable AI-generated answers."
+            )
 
         system_prompt, user_prompt = self._build_prompts(query_text, contexts)
 

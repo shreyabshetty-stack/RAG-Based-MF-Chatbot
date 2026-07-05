@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from groq import Groq
 
 # Load environment variables
-load_dotenv()
+load_dotenv(override=True)
 
 # Predefined educational refusal message
 REFUSAL_RESPONSE = (
@@ -16,16 +16,22 @@ REFUSAL_RESPONSE = (
 # Rule-based advisory keywords (Regex patterns)
 ADVISORY_KEYWORDS = [
     r"\bshould\s+i\s+(?:buy|invest|choose|sell|pick|withdraw)\b",
-    r"\bwhich\s+(?:fund|scheme|one)\s+is\s+(?:better|best|good|safe|recommended)\b",
+    r"\bwhich\s+(?:[a-zA-Z0-9_-]+\s+)*(?:fund|scheme|one)\s+is\s+(?:better|best|good|safe|recommended)\b",
     r"\bcompare\s+performance\b",
-    r"\brecommend\s+me\b",
+    r"\brecommend[a-zA-Z]*\b",
     r"\bwhere\s+should\s+i\s+invest\b",
-    r"\bwill\s+(?:it|this|hdfc)\s+(?:give|grow|make|double)\b",
+    r"\bwill\s+(?:[a-zA-Z0-9_-]+\s+){0,5}(?:give|grow|make|double|yield|return)\b",
     r"\b(?:better|best)\s+(?:fund|option|investment|choice)\b",
     r"\bis\s+(?:it|hdfc\s+.*)\s+safe\b",
     r"\bperformance\s+forecast\b",
     r"\bexpected\s+returns\b",
-    r"\bshould\s+i\s+go\s+for\b"
+    r"\bshould\s+i\s+go\s+for\b",
+    r"\bwithdraw\b",
+    r"\badvisable\b",
+    r"\bfuture\s+performance\b",
+    r"\bhistorical\s+returns\b",
+    r"\breturn[s]?\b",
+    r"\bperform(?:ed|ance)?\b"
 ]
 ADVISORY_REGEX = re.compile("|".join(ADVISORY_KEYWORDS), re.IGNORECASE)
 
@@ -72,7 +78,7 @@ class MutualFundClassifier:
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": f"Query: {query_text}"}
                     ],
-                    model="llama3-8b-8192",
+                    model="llama-3.1-8b-instant",
                     temperature=0.0,
                     max_tokens=5
                 )

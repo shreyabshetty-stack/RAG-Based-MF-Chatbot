@@ -65,17 +65,16 @@ class ResponseValidator:
         replaces it with the expected_url from context metadata.
         """
         urls_found = URL_PATTERN.findall(text)
-        valid_urls = [u for u in urls_found if any(u.startswith(allowed) for allowed in ALLOWED_SOURCE_URLS)]
 
-        if not valid_urls:
-            # No valid URL found: inject one at the end of the main text
-            text = text.strip() + f" (Source: {expected_url})"
-        elif len(valid_urls) > 1:
-            # More than one URL found: strip all and inject the correct one
-            for url in urls_found:
-                text = text.replace(url, "").strip()
-            text = text + f" (Source: {expected_url})"
+        # If there is exactly one URL and it is exactly the expected_url, keep it as is.
+        if len(urls_found) == 1 and urls_found[0] == expected_url:
+            return text
 
+        # Otherwise, strip all URLs found and inject the expected one
+        for url in urls_found:
+            text = text.replace(url, "").strip()
+        
+        text = text + f" (Source: {expected_url})"
         return text
 
     def validate_and_format(self, llm_response, context_source_url):
