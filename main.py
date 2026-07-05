@@ -36,8 +36,39 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 # ─── Logging ──────────────────────────────────────────────────────
+import collections
+import traceback
+
+class InMemoryLogHandler(logging.Handler):
+    def __init__(self, capacity=100):
+        super().__init__()
+        self.capacity = capacity
+        self.logs = collections.deque(maxlen=capacity)
+
+    def emit(self, record):
+        try:
+            log_entry = {
+                "timestamp": datetime.utcnow().isoformat() + "Z",
+                "level": record.levelname,
+                "logger": record.name,
+                "message": record.getMessage()
+            }
+            if record.exc_info:
+                log_entry["traceback"] = "".join(traceback.format_exception(*record.exc_info))
+            self.logs.append(log_entry)
+        except Exception:
+            self.handleError(record)
+
+    def get_logs(self):
+        return list(self.logs)
+
+# Configure basic logging and add the in-memory log handler
 logging.basicConfig(level=logging.INFO, format="%(levelname)s:     %(message)s")
 logger = logging.getLogger(__name__)
+
+in_memory_log_handler = InMemoryLogHandler()
+in_memory_log_handler.setLevel(logging.INFO)
+logging.getLogger().addHandler(in_memory_log_handler)
 
 # ─── Lazy-load pipeline components ───────────────────────────────
 # Loaded once at startup via lifespan to avoid cold-start penalty
@@ -150,6 +181,15 @@ async def health_check():
             "components": components,
             "timestamp": datetime.utcnow().isoformat() + "Z",
         }
+    )
+
+
+@app.get("/api/logs")
+async def get_logs():
+    """Fetch the last 100 backend logs and tracebacks for debugging."""
+    return JSONResponse(
+        status_code=200,
+        content={"logs": in_memory_log_handler.get_logs()}
     )
 
 

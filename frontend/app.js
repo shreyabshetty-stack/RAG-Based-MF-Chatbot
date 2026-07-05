@@ -442,7 +442,10 @@ function appendErrorBubble(message, save = true) {
       <span class="material-symbols-outlined" style="font-size:18px;">error</span>
     </div>
     <div class="bot-bubble-wrap">
-      <div class="error-bubble">${escHtml(message)}</div>
+      <div class="error-bubble">
+        ${escHtml(message)}
+        <span class="debug-logs-link" onclick="openLogsModal()">View System Logs</span>
+      </div>
     </div>`;
   canvas.appendChild(row);
 
@@ -486,3 +489,80 @@ function showToast(msg) {
   setTimeout(hideToast, 6000);
 }
 function hideToast() { toastEl.classList.remove("visible"); }
+
+/* ── System Logs ─────────────────────────────────────────────────── */
+function openLogsModal() {
+  const modal = document.getElementById("logs-modal");
+  if (modal) {
+    modal.classList.add("active");
+    fetchAndDisplayLogs();
+  }
+}
+
+function closeLogsModal() {
+  const modal = document.getElementById("logs-modal");
+  if (modal) {
+    modal.classList.remove("active");
+  }
+}
+
+async function fetchAndDisplayLogs() {
+  const outputEl = document.getElementById("logs-output");
+  if (!outputEl) return;
+  
+  outputEl.innerHTML = '<div class="no-logs">Loading system logs...</div>';
+  
+  try {
+    const response = await fetch("/api/logs");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    const logs = data.logs || [];
+    
+    if (logs.length === 0) {
+      outputEl.innerHTML = '<div class="no-logs">No system logs recorded yet.</div>';
+      return;
+    }
+    
+    outputEl.innerHTML = "";
+    logs.forEach(log => {
+      const line = document.createElement("div");
+      line.className = `log-line log-${log.level.toLowerCase()}`;
+      
+      const meta = document.createElement("span");
+      meta.className = "log-meta";
+      meta.textContent = `[${log.timestamp.substring(11, 19)}] [${log.level}] [${log.logger}]`;
+      
+      const text = document.createElement("span");
+      text.className = "log-message";
+      text.textContent = log.message;
+      
+      line.appendChild(meta);
+      line.appendChild(text);
+      
+      if (log.traceback) {
+        const tb = document.createElement("pre");
+        tb.className = "log-tb";
+        tb.textContent = log.traceback;
+        line.appendChild(tb);
+      }
+      
+      outputEl.appendChild(line);
+    });
+    
+    // Auto-scroll to bottom of logs
+    outputEl.scrollTop = outputEl.scrollHeight;
+    
+  } catch (error) {
+    outputEl.innerHTML = `<div class="no-logs" style="color:#f07178;">Failed to fetch system logs: ${error.message}</div>`;
+  }
+}
+
+// Close modal when clicking outside
+window.addEventListener("click", (e) => {
+  const modal = document.getElementById("logs-modal");
+  if (e.target === modal) {
+    closeLogsModal();
+  }
+});

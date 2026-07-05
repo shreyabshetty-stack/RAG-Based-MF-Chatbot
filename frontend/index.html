@@ -48,6 +48,9 @@
     <button class="sidebar-nav-btn">
       <span class="material-symbols-outlined" style="font-size:18px;">settings</span> Settings
     </button>
+    <button class="sidebar-nav-btn" onclick="openLogsModal()">
+      <span class="material-symbols-outlined" style="font-size:18px;">terminal</span> System Logs
+    </button>
   </div>
 </aside>
 
@@ -126,6 +129,27 @@
   </div>
 
 </main>
+
+<!-- ─── Developer Logs Modal ────────────────────────────────────── -->
+<div id="logs-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2><span class="material-symbols-outlined header-icon">terminal</span> System & Debug Logs</h2>
+      <div class="modal-header-actions">
+        <button onclick="fetchAndDisplayLogs()" class="modal-btn" title="Refresh Logs">
+          <span class="material-symbols-outlined">refresh</span> Refresh
+        </button>
+        <button onclick="closeLogsModal()" class="modal-btn close-modal-btn">✕</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc">Recent backend stdout/stderr logs and exceptions captured for runtime diagnostics:</p>
+      <div class="logs-container" id="logs-output">
+        <div class="no-logs">Loading system logs...</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="/static/app.js?v=2"></script>
 </body>
