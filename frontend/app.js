@@ -43,7 +43,6 @@ const dateLabel    = document.getElementById("date-label");
 
   loadChats();
   renderChatHistory();
-  buildExampleChips();
   buildExamples();
   checkHealth();
 })();
@@ -195,21 +194,6 @@ function startNewChat() {
 
 function clearChat() {
   startNewChat();
-}
-
-/* ── Build example chips above input box ──────────────────────────── */
-function buildExampleChips() {
-  const container = document.getElementById("example-chips");
-  if (!container) return;
-  container.innerHTML = "";
-
-  EXAMPLES.forEach(ex => {
-    const chip = document.createElement("span");
-    chip.className = "example-chip";
-    chip.innerHTML = `<span class="material-symbols-outlined">${ex.icon}</span>${escHtml(ex.text)}`;
-    chip.addEventListener("click", () => fillAndSend(ex.text));
-    container.appendChild(chip);
-  });
 }
 
 /* ── Build welcome-state example query buttons ────────────────────── */

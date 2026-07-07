@@ -441,17 +441,6 @@ body {
   margin: 0 auto; left: 50%; transform: translateX(-50%);
 }
 
-.filter-row { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
-.example-chip {
-  padding: 6px 12px; background: var(--surface);
-  border: 1px solid var(--border); border-radius: var(--radius-md);
-  font-size: 12px; font-weight: 500; color: var(--text-muted);
-  cursor: pointer; transition: all var(--transition);
-  display: flex; align-items: center; gap: 6px;
-}
-.example-chip:hover { border-color: rgba(0,200,150,0.35); color: var(--text); background: rgba(0,200,150,0.04); }
-.example-chip .material-symbols-outlined { font-size: 14px; color: var(--primary); }
-
 .input-shell { position: relative; display: flex; align-items: center; }
 .input-search-icon { position: absolute; left: 16px; color: var(--text-dim); pointer-events: none; }
 #chat-input {
