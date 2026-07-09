@@ -1,26 +1,31 @@
 # 🤖 FundBot — RAG-Based Mutual Fund FAQ Assistant (HDFC Funds)
 
-**FundBot** is a high-performance, facts-only FAQ assistant for mutual fund schemes, specifically designed for querying official HDFC mutual fund details. Leveraging a Retrieval-Augmented Generation (RAG) architecture integrated with multi-stage guardrails, FundBot guarantees strict regulatory compliance (SEBI & AMFI) by answering only objective, verifiable queries and actively refusing to provide investment advice, speculative predictions, or subjective comparisons.
+[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Groq](https://img.shields.io/badge/Groq-Llama%203-orange.svg)](https://groq.com/)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-FC6D26?style=flat)](https://trychroma.com/)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-BGE%20Embeddings-yellow)](https://huggingface.co/BAAI/bge-small-en-v1.5)
+
+An AI-powered, facts-only FAQ assistant for mutual fund schemes sourced directly from Groww. This application combines semantic vector search (ChromaDB + BGE Embeddings) with Groq's Large Language Model reasoning (`llama3-8b-8192` or `llama3-70b-8192`) and multi-stage guardrails (PII scrubbing, intent classification, sentence/citation validation) to answer objective, verifiable investor queries while strictly adhering to SEBI and AMFI compliance regulations against providing investment advice.
 
 ---
 
-## 📖 Project Overview
+## ✨ Key Features
 
-Retail investors and customer support teams often need immediate, accurate, and source-verified facts about mutual funds—such as expense ratios, exit loads, benchmark indices, or ELSS lock-in periods. FundBot solves this by combining advanced semantic retrieval with strict programmatic guardrails.
-
-### Key Characteristics:
-* **Facts-Only Retrieval:** All factual answers are generated *exclusively* from official, scraped mutual fund scheme attributes (sourced from official AMC and Groww documentation).
-* **Zero Advisory Policy:** The system automatically detects non-factual or advisory queries (e.g., *"Should I buy this fund?"*, *"Which is better?"*) and routes them to a polite refusal response with educational resources instead of passing them to the LLM.
-* **Strict Validation Pipeline:** Responses are checked programmatically to verify they contain exactly one source link, do not exceed three sentences, and contain zero speculative language.
-* **Privacy by Design:** Personal Identifiable Information (PII) like PAN, Aadhaar, phone numbers, and email addresses are automatically scrubbed at the input gate before processing.
+- **Facts-Only Retrieval**: Answers objective, scheme-specific queries regarding expense ratios, exit loads, minimum SIP amounts, ELSS lock-in periods, Riskometer classifications, and benchmark indices.
+- **Strict Compliance Guardrails**: Programmatically validates LLM responses to ensure they do not exceed 3 sentences, contain exactly one citation link, and include no advisory terminology.
+- **PII Scrubbing & Privacy**: Redacts sensitive personal information (PAN, Aadhaar, phone numbers, emails) automatically at the input boundary.
+- **Hybrid Search Engine**: Combines keyword search (BM25) and dense semantic vector search (ChromaDB + BGE Embeddings) for extremely high retrieval accuracy.
+- **Polite Refusal Handler**: Bypasses the LLM entirely for speculative or advisory queries (e.g., *"Should I buy..."*, *"Which fund is better?"*), returning polite refusals alongside educational AMFI portal links.
+- **Interactive UI Dashboard**: A clean, minimalist single-page chat interface built with native HTML, CSS, and JS, featuring quick examples, disclaimers, and live system log tracking.
 
 ### 📊 Supported HDFC Mutual Fund Schemes
 FundBot operates on a curated corpus of the following 5 HDFC mutual fund schemes:
-1. **[HDFC Mid-Cap Opportunities Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth)**
-2. **[HDFC Flexi Cap Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth)**
-3. **[HDFC Focused 30 Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-focused-fund-direct-growth)**
-4. **[HDFC ELSS Tax Saver Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth)**
-5. **[HDFC Top 100 Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth)**
+- **[HDFC Mid-Cap Opportunities Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth)**
+- **[HDFC Flexi Cap Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth)**
+- **[HDFC Focused 30 Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-focused-fund-direct-growth)**
+- **[HDFC ELSS Tax Saver Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth)**
+- **[HDFC Top 100 Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth)**
 
 ---
 
