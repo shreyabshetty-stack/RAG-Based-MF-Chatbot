@@ -1,6 +1,26 @@
-# FundBot — RAG-Based Mutual Fund FAQ Assistant (HDFC Funds)
+# 🤖 FundBot — RAG-Based Mutual Fund FAQ Assistant (HDFC Funds)
 
-FundBot is a facts-only FAQ assistant for mutual fund schemes, designed to answer objective, verifiable investor queries by retrieving details exclusively from official data. It uses a Retrieval-Augmented Generation (RAG) architecture with strict safety guardrails to ensure regulatory compliance by preventing any investment advice, recommendations, or speculative suggestions.
+**FundBot** is a high-performance, facts-only FAQ assistant for mutual fund schemes, specifically designed for querying official HDFC mutual fund details. Leveraging a Retrieval-Augmented Generation (RAG) architecture integrated with multi-stage guardrails, FundBot guarantees strict regulatory compliance (SEBI & AMFI) by answering only objective, verifiable queries and actively refusing to provide investment advice, speculative predictions, or subjective comparisons.
+
+---
+
+## 📖 Project Overview
+
+Retail investors and customer support teams often need immediate, accurate, and source-verified facts about mutual funds—such as expense ratios, exit loads, benchmark indices, or ELSS lock-in periods. FundBot solves this by combining advanced semantic retrieval with strict programmatic guardrails.
+
+### Key Characteristics:
+* **Facts-Only Retrieval:** All factual answers are generated *exclusively* from official, scraped mutual fund scheme attributes (sourced from official AMC and Groww documentation).
+* **Zero Advisory Policy:** The system automatically detects non-factual or advisory queries (e.g., *"Should I buy this fund?"*, *"Which is better?"*) and routes them to a polite refusal response with educational resources instead of passing them to the LLM.
+* **Strict Validation Pipeline:** Responses are checked programmatically to verify they contain exactly one source link, do not exceed three sentences, and contain zero speculative language.
+* **Privacy by Design:** Personal Identifiable Information (PII) like PAN, Aadhaar, phone numbers, and email addresses are automatically scrubbed at the input gate before processing.
+
+### 📊 Supported HDFC Mutual Fund Schemes
+FundBot operates on a curated corpus of the following 5 HDFC mutual fund schemes:
+1. **[HDFC Mid-Cap Opportunities Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth)**
+2. **[HDFC Flexi Cap Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth)**
+3. **[HDFC Focused 30 Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-focused-fund-direct-growth)**
+4. **[HDFC ELSS Tax Saver Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth)**
+5. **[HDFC Top 100 Fund (Direct Growth)](https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth)**
 
 ---
 
