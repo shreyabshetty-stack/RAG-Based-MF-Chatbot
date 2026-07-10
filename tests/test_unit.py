@@ -344,6 +344,28 @@ class TestMutualFundRetriever(unittest.TestCase):
         self.assertEqual(emb, [0.1, 0.2, 0.3])
         mock_post.assert_called_once()
 
+    @patch("requests.post")
+    @patch("os.path.exists")
+    @patch("builtins.open", new_callable=unittest.mock.mock_open, read_data='[{"id": "chunk_0", "text": "HDFC Mid-Cap exit load is 1%.", "metadata": {"fund_name": "HDFC Mid-Cap Opportunities Fund", "source_url": "https://groww.in"}, "embedding": [0.1, 0.2, 0.3]}]')
+    def test_json_retrieval(self, mock_file, mock_exists, mock_post):
+        with patch.dict(os.environ, {"VERCEL": "1"}):
+            mock_exists.return_value = True
+            
+            mock_response = MagicMock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = [0.1, 0.2, 0.3]
+            mock_post.return_value = mock_response
+            
+            from services.retriever import MutualFundRetriever
+            retriever = MutualFundRetriever()
+            
+            self.assertTrue(retriever.use_json)
+            
+            results = retriever.retrieve_relevant_contexts("What is the exit load of HDFC Mid-Cap?")
+            self.assertEqual(len(results), 1)
+            self.assertEqual(results[0]["text"], "HDFC Mid-Cap exit load is 1%.")
+            self.assertGreaterEqual(results[0]["similarity"], 0.99)
+
 
 if __name__ == "__main__":
     unittest.main()

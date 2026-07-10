@@ -4,8 +4,8 @@ pydantic
 requests
 beautifulsoup4
 html5lib
-chromadb
 groq
 
 python-dotenv
 pysqlite3-binary; sys_platform == 'linux'
+

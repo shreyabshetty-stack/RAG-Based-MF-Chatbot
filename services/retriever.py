@@ -1,6 +1,8 @@
 import os
 import sys
+import json
 
+CHROMA_AVAILABLE = False
 # On Vercel, override system SQLite if pysqlite3-binary is installed
 if os.environ.get("VERCEL"):
     try:
@@ -9,7 +11,11 @@ if os.environ.get("VERCEL"):
     except ImportError:
         pass
 
-import chromadb
+try:
+    import chromadb
+    CHROMA_AVAILABLE = True
+except ImportError:
+    CHROMA_AVAILABLE = False
 
 # Constants (aligned with chunk_and_embed.py)
 CHROMA_DB_DIR = "data/chroma_db"
@@ -21,28 +27,40 @@ class MutualFundRetriever:
         # Resolve path relative to current working directory
         cwd = os.getcwd()
         self.db_path = os.path.join(cwd, CHROMA_DB_DIR)
+        self.json_path = os.path.join(cwd, "data", "chunk_embeddings.json")
         
-        if not os.path.exists(self.db_path):
-            raise FileNotFoundError(f"ChromaDB not found at {self.db_path}. Please run chunk_and_embed.py first.")
+        # Always use lightweight JSON fallback on Vercel to avoid sqlite/chromadb size and binary compilation issues
+        self.use_json = os.environ.get("VERCEL") or not CHROMA_AVAILABLE
+        
+        if self.use_json:
+            if not os.path.exists(self.json_path):
+                raise FileNotFoundError(f"JSON embeddings not found at {self.json_path}. Please run chunk_and_embed.py first.")
+            print(f"Loading lightweight JSON embeddings from {self.json_path}...")
+            with open(self.json_path, "r", encoding="utf-8") as f:
+                self.chunks = json.load(f)
+            print(f"Loaded {len(self.chunks)} chunks from JSON backup.")
+        else:
+            if not os.path.exists(self.db_path):
+                raise FileNotFoundError(f"ChromaDB not found at {self.db_path}. Please run chunk_and_embed.py first.")
 
-        # Vercel Serverless environment runs on a read-only filesystem.
-        # We must copy the database directory to /tmp (which is writable) to avoid SQLite journal/lock failures.
-        if os.environ.get("VERCEL"):
-            import shutil
-            tmp_db_path = "/tmp/chroma_db"
-            print(f"Vercel detected. Copying ChromaDB from {self.db_path} to {tmp_db_path}...")
-            try:
-                if os.path.exists(tmp_db_path):
-                    shutil.rmtree(tmp_db_path)
-                shutil.copytree(self.db_path, tmp_db_path)
-                self.db_path = tmp_db_path
-                print("ChromaDB copied to /tmp successfully.")
-            except Exception as e:
-                print(f"Error copying ChromaDB to /tmp: {e}")
-            
-        print("Connecting to ChromaDB client...")
-        self.chroma_client = chromadb.PersistentClient(path=self.db_path)
-        self.collection = self.chroma_client.get_collection(COLLECTION_NAME)
+            # Vercel Serverless environment runs on a read-only filesystem.
+            # We must copy the database directory to /tmp (which is writable) to avoid SQLite journal/lock failures.
+            if os.environ.get("VERCEL"):
+                import shutil
+                tmp_db_path = "/tmp/chroma_db"
+                print(f"Vercel detected. Copying ChromaDB from {self.db_path} to {tmp_db_path}...")
+                try:
+                    if os.path.exists(tmp_db_path):
+                        shutil.rmtree(tmp_db_path)
+                    shutil.copytree(self.db_path, tmp_db_path)
+                    self.db_path = tmp_db_path
+                    print("ChromaDB copied to /tmp successfully.")
+                except Exception as e:
+                    print(f"Error copying ChromaDB to /tmp: {e}")
+                
+            print("Connecting to ChromaDB client...")
+            self.chroma_client = chromadb.PersistentClient(path=self.db_path)
+            self.collection = self.chroma_client.get_collection(COLLECTION_NAME)
 
     def _get_embedding(self, text):
         """Fetches embedding vector from Hugging Face Inference API with automatic retry/backoff."""
@@ -99,25 +117,44 @@ class MutualFundRetriever:
         # Embed query
         query_embedding = self._get_embedding(prefixed_query)
         
-        # Query DB (fetch more candidates to allow for re-ranking)
-        results = self.collection.query(
-            query_embeddings=[query_embedding],
-            n_results=top_k * 2
-        )
-        
-        documents = results.get("documents", [[]])[0]
-        metadatas = results.get("metadatas", [[]])[0]
-        distances = results.get("distances", [[]])[0]
-        
         retrieved_items = []
-        for i in range(len(documents)):
-            similarity = 1.0 - distances[i]
-            if similarity >= 0.35:
-                retrieved_items.append({
-                    "text": documents[i],
-                    "metadata": metadatas[i],
+        if self.use_json:
+            candidates = []
+            for chunk in self.chunks:
+                emb = chunk["embedding"]
+                dot_product = sum(x * y for x, y in zip(query_embedding, emb))
+                norm_query = sum(x * x for x in query_embedding) ** 0.5
+                norm_chunk = sum(x * x for x in emb) ** 0.5
+                similarity = dot_product / (norm_query * norm_chunk) if (norm_query and norm_chunk) else 0.0
+                candidates.append({
+                    "text": chunk["text"],
+                    "metadata": chunk["metadata"],
                     "similarity": similarity
                 })
+            # Sort candidates by similarity descending
+            candidates.sort(key=lambda x: x["similarity"], reverse=True)
+            for item in candidates[:top_k * 2]:
+                if item["similarity"] >= 0.35:
+                    retrieved_items.append(item)
+        else:
+            # Query DB (fetch more candidates to allow for re-ranking)
+            results = self.collection.query(
+                query_embeddings=[query_embedding],
+                n_results=top_k * 2
+            )
+            
+            documents = results.get("documents", [[]])[0]
+            metadatas = results.get("metadatas", [[]])[0]
+            distances = results.get("distances", [[]])[0]
+            
+            for i in range(len(documents)):
+                similarity = 1.0 - distances[i]
+                if similarity >= 0.35:
+                    retrieved_items.append({
+                        "text": documents[i],
+                        "metadata": metadatas[i],
+                        "similarity": similarity
+                    })
             
         # Re-rank based on explicit fund keywords in the query to avoid cross-fund confusion
         q_lower = query_text.lower()

@@ -180,7 +180,21 @@ def main():
         metadatas=metadatas
     )
     
-    print("Vector database setup complete! Embeddings successfully persisted.")
+    # Save the chunk data and embeddings to a lightweight JSON file for Vercel/serverless compatibility
+    json_path = os.path.join(os.path.dirname(CHROMA_DB_DIR), "chunk_embeddings.json")
+    print(f"Saving lightweight JSON embeddings file to {json_path}...")
+    serializable_chunks = []
+    for i in range(len(all_chunks)):
+        serializable_chunks.append({
+            "id": ids[i],
+            "text": texts[i],
+            "metadata": metadatas[i],
+            "embedding": embeddings[i]
+        })
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(serializable_chunks, f, ensure_ascii=False, indent=2)
+    
+    print("Vector database setup and JSON backup complete! Embeddings successfully persisted.")
 
 if __name__ == "__main__":
     main()

@@ -131,9 +131,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Serve frontend static assets
+# Serve frontend static assets (only mounted if directory exists; Vercel routes `/static` directly)
 FRONTEND_DIR = os.path.join(os.path.dirname(__file__), "frontend")
-app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+if os.path.exists(FRONTEND_DIR):
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+
 
 
 # ─── Request / Response models ────────────────────────────────────
