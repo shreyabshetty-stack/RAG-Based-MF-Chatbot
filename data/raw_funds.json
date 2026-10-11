@@ -3,7 +3,7 @@
     "scheme_name": "HDFC Mid Cap Fund Direct Growth",
     "source_url": "https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth",
     "isin": "INF179K01XQ0",
-    "expense_ratio": "0.76%",
+    "expense_ratio": "0.75%",
     "exit_load": "Exit load of 1% if redeemed within 1 year.",
     "min_sip_investment": 100,
     "elss_lock_in": "Nil",
@@ -18,13 +18,13 @@
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-10-10"
+    "last_updated": "2026-10-11"
   },
   {
     "scheme_name": "HDFC Flexi Cap Direct Plan Growth",
     "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
     "isin": "INF179K01UT0",
-    "expense_ratio": "0.77%",
+    "expense_ratio": "0.75%",
     "exit_load": "Exit load of 1% if redeemed within 1 year",
     "min_sip_investment": 100,
     "elss_lock_in": "Nil",
@@ -39,7 +39,7 @@
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-10-10"
+    "last_updated": "2026-10-11"
   },
   {
     "scheme_name": "HDFC Focused Fund Direct Growth",
@@ -60,13 +60,13 @@
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-10-10"
+    "last_updated": "2026-10-11"
   },
   {
     "scheme_name": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
     "source_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
     "isin": "INF179K01YS4",
-    "expense_ratio": "1.21%",
+    "expense_ratio": "1.2%",
     "exit_load": "Nil",
     "min_sip_investment": 500,
     "elss_lock_in": "3 years",
@@ -81,7 +81,7 @@
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-10-10"
+    "last_updated": "2026-10-11"
   },
   {
     "scheme_name": "HDFC Large Cap Fund Direct Growth",
@@ -102,6 +102,6 @@
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-10-10"
+    "last_updated": "2026-10-11"
   }
 ]
