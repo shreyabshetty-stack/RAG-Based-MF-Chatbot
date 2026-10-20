@@ -12,13 +12,13 @@
     "fund_manager": "Chirag Setalvad",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 101856.0604,
-    "nav": 221.058,
-    "nav_date": "16-Oct-2026",
+    "nav": 219.784,
+    "nav_date": "19-Oct-2026",
     "portfolio_turnover": "13",
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-10-19"
+    "last_updated": "2026-10-20"
   },
   {
     "scheme_name": "HDFC Flexi Cap Direct Plan Growth",
@@ -33,13 +33,13 @@
     "fund_manager": "Prashant Jain",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 108546.9792,
-    "nav": 2184.728,
-    "nav_date": "16-Oct-2026",
+    "nav": 2162.161,
+    "nav_date": "19-Oct-2026",
     "portfolio_turnover": "29",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-10-19"
+    "last_updated": "2026-10-20"
   },
   {
     "scheme_name": "HDFC Focused Fund Direct Growth",
@@ -54,13 +54,13 @@
     "fund_manager": "Vinay Kulkarni",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 26552.9174,
-    "nav": 261.243,
-    "nav_date": "16-Oct-2026",
+    "nav": 258.574,
+    "nav_date": "19-Oct-2026",
     "portfolio_turnover": "13",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-10-19"
+    "last_updated": "2026-10-20"
   },
   {
     "scheme_name": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
@@ -74,14 +74,14 @@
     "benchmark_index": "NIFTY 500 Total Return Index",
     "fund_manager": "Vinay Kulkarni",
     "launch_date": "01-Jan-2013",
-    "aum_in_cr": 14948.7374,
-    "nav": 1444.092,
-    "nav_date": "16-Oct-2026",
+    "aum_in_cr": 14948.74,
+    "nav": 1427.848,
+    "nav_date": "19-Oct-2026",
     "portfolio_turnover": "32",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-10-19"
+    "last_updated": "2026-10-20"
   },
   {
     "scheme_name": "HDFC Large Cap Fund Direct Growth",
@@ -96,12 +96,12 @@
     "fund_manager": "Prashant Jain",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 37293.9508,
-    "nav": 1172.671,
-    "nav_date": "16-Oct-2026",
+    "nav": 1158.609,
+    "nav_date": "19-Oct-2026",
     "portfolio_turnover": "18",
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-10-19"
+    "last_updated": "2026-10-20"
   }
 ]
