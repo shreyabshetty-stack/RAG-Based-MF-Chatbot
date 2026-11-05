@@ -12,13 +12,13 @@
     "fund_manager": "Chirag Setalvad",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 101856.06,
-    "nav": 220.09,
-    "nav_date": "03-Nov-2026",
+    "nav": 223.138,
+    "nav_date": "04-Nov-2026",
     "portfolio_turnover": "13",
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-11-04"
+    "last_updated": "2026-11-05"
   },
   {
     "scheme_name": "HDFC Flexi Cap Direct Plan Growth",
@@ -33,13 +33,13 @@
     "fund_manager": "Prashant Jain",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 108546.98,
-    "nav": 2237.596,
-    "nav_date": "03-Nov-2026",
+    "nav": 2255.063,
+    "nav_date": "04-Nov-2026",
     "portfolio_turnover": "29",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-04"
+    "last_updated": "2026-11-05"
   },
   {
     "scheme_name": "HDFC Focused Fund Direct Growth",
@@ -54,13 +54,13 @@
     "fund_manager": "Vinay Kulkarni",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 26552.92,
-    "nav": 264.531,
-    "nav_date": "03-Nov-2026",
+    "nav": 267.109,
+    "nav_date": "04-Nov-2026",
     "portfolio_turnover": "13",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-04"
+    "last_updated": "2026-11-05"
   },
   {
     "scheme_name": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
@@ -75,13 +75,13 @@
     "fund_manager": "Vinay Kulkarni",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 14948.74,
-    "nav": 1470.696,
-    "nav_date": "03-Nov-2026",
+    "nav": 1480.719,
+    "nav_date": "04-Nov-2026",
     "portfolio_turnover": "32",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-04"
+    "last_updated": "2026-11-05"
   },
   {
     "scheme_name": "HDFC Large Cap Fund Direct Growth",
@@ -96,12 +96,12 @@
     "fund_manager": "Prashant Jain",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 37293.95,
-    "nav": 1197.555,
-    "nav_date": "03-Nov-2026",
+    "nav": 1207.087,
+    "nav_date": "04-Nov-2026",
     "portfolio_turnover": "18",
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-11-04"
+    "last_updated": "2026-11-05"
   }
 ]
