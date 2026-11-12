@@ -11,14 +11,14 @@
     "benchmark_index": "NIFTY Midcap 150 Total Return Index",
     "fund_manager": "Chirag Setalvad",
     "launch_date": "01-Jan-2013",
-    "aum_in_cr": 101856.06,
-    "nav": 227.102,
-    "nav_date": "09-Nov-2026",
+    "aum_in_cr": 100687.07,
+    "nav": 229.552,
+    "nav_date": "11-Nov-2026",
     "portfolio_turnover": "13",
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-11-11"
+    "last_updated": "2026-11-12"
   },
   {
     "scheme_name": "HDFC Flexi Cap Direct Plan Growth",
@@ -32,14 +32,14 @@
     "benchmark_index": "NIFTY 500 Total Return Index",
     "fund_manager": "Prashant Jain",
     "launch_date": "01-Jan-2013",
-    "aum_in_cr": 108546.98,
-    "nav": 2345.835,
-    "nav_date": "09-Nov-2026",
+    "aum_in_cr": 110441.27,
+    "nav": 2363.402,
+    "nav_date": "11-Nov-2026",
     "portfolio_turnover": "29",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-11"
+    "last_updated": "2026-11-12"
   },
   {
     "scheme_name": "HDFC Focused Fund Direct Growth",
@@ -54,13 +54,13 @@
     "fund_manager": "Vinay Kulkarni",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 26552.92,
-    "nav": 278.94,
-    "nav_date": "09-Nov-2026",
+    "nav": 280.997,
+    "nav_date": "11-Nov-2026",
     "portfolio_turnover": "13",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-11"
+    "last_updated": "2026-11-12"
   },
   {
     "scheme_name": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
@@ -75,13 +75,13 @@
     "fund_manager": "Vinay Kulkarni",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 14948.74,
-    "nav": 1537.401,
-    "nav_date": "09-Nov-2026",
+    "nav": 1552.433,
+    "nav_date": "11-Nov-2026",
     "portfolio_turnover": "32",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-11"
+    "last_updated": "2026-11-12"
   },
   {
     "scheme_name": "HDFC Large Cap Fund Direct Growth",
@@ -95,13 +95,13 @@
     "benchmark_index": "NIFTY 100 Total Return Index",
     "fund_manager": "Prashant Jain",
     "launch_date": "01-Jan-2013",
-    "aum_in_cr": 37293.95,
-    "nav": 1260.671,
-    "nav_date": "09-Nov-2026",
+    "aum_in_cr": 37466.3,
+    "nav": 1269.861,
+    "nav_date": "11-Nov-2026",
     "portfolio_turnover": "18",
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-11-11"
+    "last_updated": "2026-11-12"
   }
 ]
