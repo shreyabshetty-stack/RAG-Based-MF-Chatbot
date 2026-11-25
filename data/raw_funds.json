@@ -18,7 +18,7 @@
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-11-24"
+    "last_updated": "2026-11-25"
   },
   {
     "scheme_name": "HDFC Flexi Cap Direct Plan Growth",
@@ -39,7 +39,7 @@
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-24"
+    "last_updated": "2026-11-25"
   },
   {
     "scheme_name": "HDFC Focused Fund Direct Growth",
@@ -60,7 +60,7 @@
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-24"
+    "last_updated": "2026-11-25"
   },
   {
     "scheme_name": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
@@ -81,13 +81,13 @@
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-24"
+    "last_updated": "2026-11-25"
   },
   {
     "scheme_name": "HDFC Large Cap Fund Direct Growth",
     "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
     "isin": "INF179K01YV8",
-    "expense_ratio": "0.99%",
+    "expense_ratio": "0.98%",
     "exit_load": "Exit load of 1% if redeemed within 1 year",
     "min_sip_investment": 100,
     "elss_lock_in": "Nil",
@@ -102,6 +102,6 @@
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-11-24"
+    "last_updated": "2026-11-25"
   }
 ]
