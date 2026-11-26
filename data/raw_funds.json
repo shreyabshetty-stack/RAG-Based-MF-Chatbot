@@ -12,13 +12,13 @@
     "fund_manager": "Chirag Setalvad",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 100687.07,
-    "nav": 231.351,
-    "nav_date": "23-Nov-2026",
+    "nav": 232.862,
+    "nav_date": "25-Nov-2026",
     "portfolio_turnover": "13",
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-11-25"
+    "last_updated": "2026-11-26"
   },
   {
     "scheme_name": "HDFC Flexi Cap Direct Plan Growth",
@@ -33,13 +33,13 @@
     "fund_manager": "Prashant Jain",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 110441.27,
-    "nav": 2392.864,
-    "nav_date": "23-Nov-2026",
+    "nav": 2425.742,
+    "nav_date": "25-Nov-2026",
     "portfolio_turnover": "29",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-25"
+    "last_updated": "2026-11-26"
   },
   {
     "scheme_name": "HDFC Focused Fund Direct Growth",
@@ -54,13 +54,13 @@
     "fund_manager": "Vinay Kulkarni",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 26955.9,
-    "nav": 285.494,
-    "nav_date": "23-Nov-2026",
+    "nav": 289.172,
+    "nav_date": "25-Nov-2026",
     "portfolio_turnover": "13",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-25"
+    "last_updated": "2026-11-26"
   },
   {
     "scheme_name": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
@@ -75,19 +75,19 @@
     "fund_manager": "Vinay Kulkarni",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 15108.43,
-    "nav": 1566.726,
-    "nav_date": "23-Nov-2026",
+    "nav": 1590.432,
+    "nav_date": "25-Nov-2026",
     "portfolio_turnover": "32",
     "face_value": null,
     "groww_rating": 5,
     "crisil_rating": null,
-    "last_updated": "2026-11-25"
+    "last_updated": "2026-11-26"
   },
   {
     "scheme_name": "HDFC Large Cap Fund Direct Growth",
     "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
     "isin": "INF179K01YV8",
-    "expense_ratio": "0.98%",
+    "expense_ratio": "0.99%",
     "exit_load": "Exit load of 1% if redeemed within 1 year",
     "min_sip_investment": 100,
     "elss_lock_in": "Nil",
@@ -96,12 +96,12 @@
     "fund_manager": "Prashant Jain",
     "launch_date": "01-Jan-2013",
     "aum_in_cr": 37466.3,
-    "nav": 1277.914,
-    "nav_date": "23-Nov-2026",
+    "nav": 1299.207,
+    "nav_date": "25-Nov-2026",
     "portfolio_turnover": "18",
     "face_value": null,
     "groww_rating": 4,
     "crisil_rating": null,
-    "last_updated": "2026-11-25"
+    "last_updated": "2026-11-26"
   }
 ]
